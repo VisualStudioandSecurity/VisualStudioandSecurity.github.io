@@ -2,66 +2,52 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Jump | Visual Studio Games</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-        
-        body { 
-            background: #050505; 
-            color: #ff9900; 
-            font-family: 'Orbitron', sans-serif; 
-            margin: 0; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-        }
-
-        .header { text-align: center; margin-bottom: 10px; pointer-events: none; }
-        h1 { text-shadow: 0 0 15px #ff9900; margin: 0; letter-spacing: 2px; }
-        .score-board { font-size: 1rem; color: white; }
-        #score { color: #39FF14; font-size: 1.5rem; text-shadow: 0 0 10px #39FF14; }
-
-        canvas { 
-            background: #0a0a0a; 
-            border: 2px solid #333; 
-            box-shadow: 0 0 40px rgba(255, 153, 0, 0.2); 
-            border-radius: 5px; 
-            cursor: pointer; /* Indica que é clicável */
-        }
-
-        .controls { margin-top: 15px; color: #555; font-size: 0.8rem; font-family: sans-serif; }
-        
-        .btn-back {
-            margin-top: 15px;
-            background: transparent;
-            border: 1px solid #ff9900;
-            color: #ff9900;
-            padding: 8px 18px;
-            cursor: pointer;
-            font-family: 'Orbitron';
-            transition: 0.3s;
-        }
-        
-        .btn-back:hover { background: #ff9900; color: black; box-shadow: 0 0 15px #ff9900; }
+        body { background: #050505; color: #ff9900; font-family: 'Orbitron'; margin: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        canvas { background: #0a0a0a; border: 2px solid #333; border-radius: 5px; cursor: pointer; }
+        .btn { margin-top: 15px; background: transparent; border: 1px solid #ff9900; color: #ff9900; padding: 10px 20px; cursor: pointer; font-family: 'Orbitron'; }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>MEME JUMP</h1>
-        <div class="score-board">MEMES VENCIDOS: <span id="score">0</span></div>
-    </div>
-
+    <h1>SCORE: <span id="score">0</span></h1>
     <canvas id="gameCanvas" width="320" height="480"></canvas>
-
-    <div class="controls">CLIQUE NO CANVAS OU ESPAÇO PARA PULAR</div>
-    <button class="btn-back" onclick="window.location.href='index.html'">BACK TO HUB</button>
+    <button class="btn" onclick="window.location.href='index.html'">BACK TO HUB</button>
 
 <script>
-    // Lógica Sênior: Motor de Física Vetorial e Renderização em Loops Separados
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d
+    const canvas = document.getElementById("gameCanvas"), ctx = canvas.getContext("2d");
+    let score = 0, gameActive = false, bird = { x: 50, y: 200, v: 0, r: 12 }, pipes = [];
+    
+    function createPipe() {
+        let gap = 120, y = Math.random() * (canvas.height - gap - 100) + 50;
+        pipes.push({ x: canvas.width, y: y, scored: false });
+    }
+
+    function update() {
+        if (!gameActive) return;
+        bird.v += 0.25; bird.y += bird.v;
+        if (bird.y > canvas.height) reset();
+        pipes.forEach((p, i) => {
+            p.x -= 2;
+            if (!p.scored && bird.x > p.x + 50) { score++; p.scored = true; document.getElementById("score").innerText = score; }
+            if (bird.x + bird.r > p.x && bird.x - bird.r < p.x + 50 && (bird.y - bird.r < p.y || bird.y + bird.r > p.y + 120)) reset();
+            if (p.x < -50) pipes.splice(i, 1);
+        });
+        if (pipes.length === 0 || pipes[pipes.length-1].x < canvas.width - 180) createPipe();
+    }
+
+    function draw() {
+        ctx.fillStyle = "#0a0a0a"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#39FF14"; pipes.forEach(p => { ctx.fillRect(p.x, 0, 50, p.y); ctx.fillRect(p.x, p.y + 120, 50, canvas.height); });
+        ctx.fillStyle = "#ff9900"; ctx.beginPath(); ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI*2); ctx.fill();
+        if(!gameActive) { ctx.fillStyle = "white"; ctx.fillText("CLICK TO START", 100, 240); }
+    }
+
+    function reset() { bird.y = 200; bird.v = 0; pipes = []; score = 0; gameActive = false; }
+    canvas.addEventListener("click", () => { if(!gameActive) gameActive = true; bird.v = -4.5; });
+    function loop() { update(); draw(); requestAnimationFrame(loop); }
+    loop();
+</script>
+</body>
+</html>
