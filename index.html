@@ -3,154 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kovaliosky | Senior Engineer & Cyber Security</title>
+    <title>Kovaliosky | Vanguard Core</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;700&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: #000; color: #fff; font-family: 'Orbitron', sans-serif; 
-            overflow: hidden; height: 100vh; width: 100vw; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        body { background: #000; color: #fff; font-family: 'Orbitron', sans-serif; overflow: hidden; height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; }
 
-        /* SPLASH SCREEN */
-        #splash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: #39FF14; }
+        /* Splash Screen (image_e8575a.png) */
+        #splash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #39FF14; transition: 0.5s; }
 
-        /* HUB CONTENT */
-        #hub-screen { display: none; width: 100%; max-width: 1000px; flex-direction: column; align-items: center; justify-content: center; z-index: 10; padding: 20px; }
-        .chroma { color: #39FF14; text-shadow: 0 0 15px #39FF14; margin-bottom: 25px; letter-spacing: 5px; font-size: 1.4rem; text-align: center; }
+        /* Hub Content (image_e7e717.png) */
+        #hub-screen { display: none; width: 90%; max-width: 1100px; flex-direction: column; align-items: center; z-index: 10; }
+        .chroma { color: #39FF14; text-shadow: 0 0 20px #39FF14; margin-bottom: 40px; letter-spacing: 8px; font-size: 1.8rem; }
 
-        /* GRID PRINCIPAL */
-        .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; width: 100%; }
-        .card { background: #050505; border: 1px solid #1a1a1a; padding: 25px; border-radius: 15px; transition: 0.4s; }
-        
-        /* STATUS COLORS */
-        .status-red { color: #ff3131; border-color: #ff3131 !important; }
-        .status-green { color: #39FF14; border-color: #39FF14 !important; text-shadow: 0 0 10px #39FF14; }
+        /* Grid de Operações */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
+        .card { background: rgba(5, 5, 5, 0.8); border: 1px solid #1a1a1a; padding: 30px; border-radius: 10px; transition: 0.4s; }
+        .card-sec { border-color: #ff3131; }
+        .card-sol { border-color: #39FF14; }
 
-        /* TEXTOS */
-        .label { font-family: 'JetBrains Mono'; font-size: 0.5rem; color: #444; text-transform: uppercase; margin-bottom: 5px; display: block; }
-        .main-text { font-family: 'JetBrains Mono'; font-size: 0.65rem; color: #888; line-height: 1.5; margin-bottom: 15px; }
+        /* Botões */
+        .btn-inner { background: none; border: 1px solid #333; color: #666; padding: 12px; width: 100%; margin-top: 10px; font-family: 'Orbitron'; font-size: 0.6rem; transition: 0.3s; cursor: pointer; }
+        .btn-inner:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.05); }
+        .active-btn { border-color: #39FF14; color: #39FF14; text-shadow: 0 0 5px #39FF14; }
 
-        /* BOTÕES DE SOLUÇÕES */
-        .sol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { 
-            background: none; border: 1px solid #333; color: #666; padding: 10px; 
-            width: 100%; cursor: pointer; font-family: 'Orbitron'; font-size: 0.5rem; 
-            transition: 0.3s; text-transform: uppercase; 
-        }
-        button:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.05); }
-        .btn-active { border-color: #28a745; color: #28a745; }
+        /* Botão Principal */
+        .main-action { background: #39FF14; color: #000; font-weight: bold; margin-top: 50px; width: 350px; border: none; padding: 20px; font-size: 0.9rem; letter-spacing: 3px; box-shadow: 0 0 20px #39FF14; transition: 0.3s; cursor: pointer; }
+        .main-action:hover { background: #fff; transform: scale(1.05); }
 
-        /* WHATSAPP ACTION */
-        .contact-btn { background: #39FF14; color: #000; font-weight: bold; margin-top: 30px; width: 320px; border: none; padding: 15px; font-size: 0.75rem; letter-spacing: 2px; }
-        .contact-btn:hover { background: #fff; box-shadow: 0 0 25px #39FF14; cursor: pointer; }
-
-        /* FOOTER NAV */
-        .footer-nav { position: absolute; bottom: 20px; display: flex; gap: 30px; font-size: 0.6rem; color: #222; }
-        .footer-nav span { cursor: pointer; transition: 0.3s; }
-        .footer-nav span:hover { color: #39FF14; }
-
-        /* MODAIS */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #070707; border: 1px solid #39FF14; padding: 40px; max-width: 600px; border-radius: 10px; position: relative; }
-        .close { position: absolute; top: 15px; right: 20px; color: #ff3131; cursor: pointer; font-size: 0.6rem; }
+        .footer { margin-top: 40px; display: flex; gap: 40px; color: #222; font-size: 0.7rem; text-transform: uppercase; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="splash" onclick="unlock()">
-        <p style="font-family: 'JetBrains Mono';">> INITIALIZING_VANGUARD_OS...</p>
-        <p style="font-size: 0.5rem; color: #222; margin-top: 15px;">[ AUTH_REQUIRED: CLICK_TO_DECRYPT ]</p>
+        <p style="font-family: 'JetBrains Mono';">> INITIALIZING_SECURE_VANGUARD_BOOT...</p>
+        <p style="font-size: 0.4rem; color: #111; margin-top: 10px;">AUTH: KOVALIOSKY_DEV // [ ENCRYPTED_SESSION ]</p>
     </div>
 
     <div id="hub-screen">
         <h1 class="chroma">VANGUARD_CORE_HUB</h1>
         
         <div class="grid">
-            <div id="card-sec" class="card status-red">
-                <span class="label">Cybersecurity_Module</span>
-                <h3 id="sec-title" style="font-size:0.7rem; margin-bottom:10px; color:#ff3131;">SECURITY_SHIELD</h3>
-                <p id="sec-desc" class="main-text">> STATUS: UNPROTECTED<br>> THREATS: DETECTED</p>
-                <button id="sec-btn" class="status-red" onclick="runScan()">RUN_SECURITY_DEPLOY</button>
-                
-                <hr style="border:0; border-top:1px solid #1a1a1a; margin: 20px 0;">
-                
-                <span class="label">Lead_Engineer</span>
-                <p class="main-text" style="color:#fff; font-size:0.55rem;">GUILHERME KOVALIOSKY<br>Senior Dev | Cyber Specialist</p>
+            <div class="card card-sec">
+                <p style="color: #ff3131; font-size: 0.6rem; text-align: center; margin-bottom: 20px;">SECURITY_SHIELD</p>
+                <p style="color: #ff3131; font-family: 'JetBrains Mono'; font-size: 0.5rem; text-align: center;">> STATUS: PROTECTED</p>
+                <button class="btn-inner" style="border-color: #ff3131; color: #ff3131; margin-top: 30px;">RUN_SCAN</button>
             </div>
 
-            <div class="card" style="border-color: #333;">
-                <span class="label">Strategic_Deployments</span>
-                <h3 style="font-size:0.7rem; margin-bottom:15px; color:#fff;">ACTIVE_SOLUTIONS_V1</h3>
-                <div class="sol-grid">
-                    <button onclick="location.href='exemplo1.html'">Neon_Noir</button>
-                    <button onclick="location.href='exemplo2.html'">Clean_UX</button>
-                    <button onclick="location.href='exemplo3.html'">Apple_Core</button>
-                    <button onclick="location.href='exemplo4.html'">Crypto_Dash</button>
-                    <button onclick="location.href='exemplo5.html'">Agency_Web</button>
-                    <button class="btn-active" onclick="location.href='exemplo6.html'">Payment_Gate</button>
-                </div>
-                <hr style="border:0; border-top:1px solid #1a1a1a; margin: 20px 0;">
-                <span class="label">Professional_Brief</span>
-                <p class="main-text" style="font-size:0.55rem;">Especialista em criar infraestruturas blindadas com design estratégico. Foco em interfaces de alta performance e defesa cibernética ativa.</p>
+            <div class="card card-sol">
+                <p style="color: #39FF14; font-size: 0.6rem; text-align: center; margin-bottom: 20px;">SOLUTIONS</p>
+                <button class="btn-inner active-btn" onclick="copiarPix()">PAYMENT_GATE (COPY PIX)</button>
+                <button class="btn-inner" onclick="location.href='https://wa.me/5569992636349'">CLEAN_UI_DESIGN</button>
             </div>
         </div>
 
-        <button class="contact-btn" onclick="location.href='https://wa.me/5569992636349'">CONTRATAR ESPECIALISTA</button>
+        <button class="main-action" onclick="location.href='https://wa.me/5569992636349'">CONTRATAR AGORA</button>
 
-        <div class="footer-nav">
-            <span onclick="openModal('sobre')">SOBRE NÓS</span>
-            <span onclick="openModal('faq')">F.A.Q</span>
-            <span onclick="openModal('curriculo')">DETALHES TÉCNICOS</span>
-        </div>
-    </div>
-
-    <div id="modal" class="modal" onclick="this.style.display='none'">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="this.parentElement.parentElement.style.display='none'">[ CLOSE_TERMINAL ]</span>
-            <div id="modal-text" style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#888; line-height:1.6;"></div>
+        <div class="footer">
+            <span>Guilherme Kovaliosky</span>
+            <span>Senior Software Engineer</span>
         </div>
     </div>
 
     <script>
         function unlock() {
-            document.getElementById('splash').style.display = 'none';
-            document.getElementById('hub-screen').style.display = 'flex';
-        }
-        setTimeout(unlock, 4000);
-
-        function runScan() {
-            const card = document.getElementById('card-sec');
-            const title = document.getElementById('sec-title');
-            const desc = document.getElementById('sec-desc');
-            const btn = document.getElementById('sec-btn');
-            
-            desc.innerHTML = "> INITIATING_DEFENSE_PROTOCOLS...<br>> ENCRYPTING_RESOURCES...";
-            
+            document.getElementById('splash').style.opacity = '0';
             setTimeout(() => {
-                card.classList.replace('status-red', 'status-green');
-                title.style.color = "#39FF14";
-                desc.style.color = "#39FF14";
-                desc.innerHTML = "> SHIELD_ACTIVE_100%<br>> SYSTEM_SECURE_BY_VANGUARD";
-                btn.classList.replace('status-red', 'status-green');
-                btn.innerHTML = "SYSTEM_PROTECTED";
-                btn.onclick = null;
-            }, 2000);
+                document.getElementById('splash').style.display = 'none';
+                document.getElementById('hub-screen').style.display = 'flex';
+            }, 500);
         }
 
-        const info = {
-            sobre: "<h3 style='color:#39FF14; margin-bottom:15px;'>VANGUARDS VISUAL CORE</h3>Engenharia de software liderada por Guilherme Kovaliosky. Nossa missão é unir a estética do futuro com a segurança do presente. Desenvolvemos interfaces que não apenas atraem, mas protegem ativos digitais contra engenharia reversa.",
-            faq: "<h3 style='color:#39FF14; margin-bottom:15px;'>COMMON_INTEL</h3><b>> SEGURANÇA:</b> Proteção nativa contra F12 e DevTools.<br><b>> PAGAMENTOS:</b> Integração total com gateways Pix/Cripto.<br><b>> PRAZOS:</b> Desenvolvimento ágil entre 7 e 20 dias.",
-            curriculo: "<h3 style='color:#39FF14; margin-bottom:15px;'>TECHNICAL_PROFILE</h3><b>ESPECIALISTA SÊNIOR:</b> Domínio em JavaScript, Segurança Ofuscada e UI Futurista.<br><br><b>DESTAQUES:</b><br>- Criação de Gateways Blindados.<br>- Arquitetura de Micro-serviços Front-end.<br>- Design UX focado em conversão de alto valor."
-        };
-
-        function openModal(key) {
-            document.getElementById('modal-text').innerHTML = info[key];
-            document.getElementById('modal').style.display = 'flex';
+        // Função para facilitar o pagamento via Pix
+        function copiarPix() {
+            const pix = "10267545266";
+            navigator.clipboard.writeText(pix).then(() => {
+                alert("Chave Pix copiada: " + pix + "\nUse no seu app de banco para realizar o pagamento.");
+            });
         }
-        document.onkeydown = function(e) { if(e.keyCode == 123) return false; };
     </script>
 </body>
 </html>
