@@ -13,61 +13,49 @@
         }
 
         .neon-glow {
-            text-shadow: 0 0 10px #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0,255,0,0.5);
         }
 
         .border-neon {
             border: 1px solid #00ff00;
-            box-shadow: 0 0 15px rgba(0,255,0,0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
         }
+
+        .btn-main {
+            background-color: #00ff00;
+            color: #000;
+            font-weight: 900;
+            transition: 0.3s;
+        }
+
+            .btn-main:hover {
+                box-shadow: 0 0 30px #00ff00;
+                transform: scale(1.02);
+            }
     </style>
 </head>
-<body class="p-6">
-    <div class="max-w-5xl mx-auto">
-        <h1 class="text-center text-4xl font-black neon-glow mb-10 tracking-widest">VANGUARD_CORE_HUB</h1>
+<body class="p-4 md:p-12 flex items-center justify-center min-h-screen">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="border-neon p-6 rounded-xl bg-black">
-                <h2 class="text-[#00ff00] font-bold mb-4 uppercase tracking-tighter">Security_Shield</h2>
-                <div class="bg-[#00ff00]/5 p-6 border border-[#00ff00]/20 rounded">
-                    <p class="text-[10px] text-gray-500 uppercase mb-2">Live BTC/USDT</p>
-                    <span id="btc-price" class="text-3xl font-bold text-[#00ff00]">SYNCING...</span>
+    <div class="max-w-5xl w-full">
+        <h1 class="text-center text-4xl md:text-6xl font-black neon-glow mb-12 tracking-[0.2em] uppercase">VANGUARD_CORE_HUB</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="border-neon p-8 rounded-3xl bg-black/80">
+                <div class="text-[10px] text-[#00ff00] mb-4 tracking-[0.4em] font-bold">CYBERSECURITY_MODULE</div>
+                <h2 class="text-2xl font-bold text-white mb-6 uppercase">Security_Shield</h2>
+
+                <div class="bg-[#00ff00]/5 border border-[#00ff00]/30 p-6 rounded-xl mb-12">
+                    <p class="text-[10px] text-gray-500 uppercase mb-2">Market Data: BTC/USDT</p>
+                    <span id="btc-price" class="text-3xl font-mono font-bold text-[#00ff00]">CONECTANDO...</span>
                 </div>
-                <div class="mt-6 text-[10px] text-gray-500 italic uppercase">
-                    Lead: Guilherme Kovaliosky // Senior Dev
+
+                <div class="border-t border-white/10 pt-6">
+                    <p class="text-[10px] text-gray-500 uppercase italic">Lead Engineer:</p>
+                    <p class="text-sm font-bold tracking-widest">GUILHERME KOVALIOSKY</p>
+                    <p class="text-[10px] text-[#00ff00]">Senior Developer | Cyber Specialist</p>
                 </div>
             </div>
 
-            <div class="border-neon p-6 rounded-xl bg-black">
-                <h2 class="font-bold mb-4 uppercase tracking-tighter">Active_Solutions_v1</h2>
-                <div class="grid grid-cols-2 gap-3 mb-6">
-                    <div class="p-3 border border-[#00ff00]/40 text-[#00ff00] text-center text-[10px] font-bold uppercase">
-                        Repos: <span id="repo-count">0</span>
-                    </div>
-                    <a href="https://kventerprise.github.io/short-sniper/" target="_blank" class="p-3 border border-white/20 text-center text-[10px] hover:border-[#00ff00] transition-all uppercase">Short_Sniper</a>
-                </div>
-                <a href="https://github.com/kventerprise" target="_blank" class="block w-full text-center bg-[#00ff00] text-black font-black py-4 text-xs tracking-widest hover:shadow-[0_0_20px_#00ff00] transition-all">ABRIR GITHUB_</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Preço do Bitcoin
-        const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
-        ws.onmessage = (e) => {
-            const data = JSON.parse(e.data);
-            document.getElementById('btc-price').innerText = '$' + parseFloat(data.c).toLocaleString();
-        };
-
-        // Contador de Repos do seu GitHub
-        async function loadGit() {
-            try {
-                const res = await fetch('https://api.github.com/users/kventerprise');
-                const data = await res.json();
-                document.getElementById('repo-count').innerText = data.public_repos || '0';
-            } catch (e) { document.getElementById('repo-count').innerText = 'ERR'; }
-        }
-        loadGit();
-    </script>
-</body>
-</html>
+            <div class="border-neon p-8 rounded-3xl bg-black/80">
+                <div class=" text
