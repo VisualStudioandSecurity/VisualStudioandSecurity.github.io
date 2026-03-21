@@ -56,7 +56,6 @@
         .btn-pix { background-color: #32bcad; color: #0d1117; }
         .btn-pix:hover { background-color: #45d6c6; }
 
-        /* Estilo da Galeria */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -73,9 +72,7 @@
         }
 
         .game-card:hover { transform: translateY(-5px); border-color: var(--neon); }
-
         .game-card img { width: 100%; height: auto; border-bottom: 1px solid #30363d; }
-
         .game-card-body { padding: 15px; }
 
         .ads-container {
@@ -98,7 +95,7 @@
 
     <div class="container">
         <h1>Visual Studio Games</h1>
-        <p>Hub de Desenvolvimento, Cyber Security e Tecnologia por Guilherme Silva.</p>
+        <p>Hub de Desenvolvimento e Cyber Security por Guilherme Silva.</p>
 
         <div class="ads-container">
             <ins class="adsbygoogle"
@@ -113,13 +110,71 @@
         <div class="section-box">
             <h2><span style="color: var(--accent);">[01]</span> SOBRE O AUTOR</h2>
             <p>
-                Especialista em Python, GDevelop e Cyber Security. Este portal centraliza meus projetos de automação e jogos autorais, focando em código limpo, seguro e performático.
+                Olá, sou Guilherme Silva (Kovaliosky DeV). Especialista em Python e Cyber Security. Este portal foca em automação e jogos autorais com código seguro e performático.
             </p>
             <div class="btn-group">
-                <a href="https://github.com/VisualStudioandSecurity" class="btn btn-github" target="_blank">Ver Repositórios</a>
+                <a href="https://github.com/VisualStudioandSecurity" class="btn btn-github" target="_blank">Repositórios GitHub</a>
                 <button class="btn btn-pix" onclick="copyPix()">Apoiar via PIX</button>
             </div>
         </div>
 
         <div class="section-box">
-            <h2><span style="color:
+            <h2><span style="color: var(--accent);">[02]</span> PROJETOS ATIVOS</h2>
+            <div class="gallery">
+                <div class="game-card">
+                    <img src="thumb_neon_snaker.jpg" alt="Neon Snaker">
+                    <div class="game-card-body">
+                        <h3>Neon Snaker</h3>
+                        <a href="./neon-snaker/" class="btn btn-github" style="font-size: 0.7rem; margin-top:10px;">ACESSAR</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="thumb_cyber_defense.jpg" alt="Cyber Defense">
+                    <div class="game-card-body">
+                        <h3>Cyber Defense</h3>
+                        <a href="./cyber-defense/" class="btn btn-github" style="font-size: 0.7rem; margin-top:10px;">ACESSAR</a>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="thumb_pedro_raccoon.jpg" alt="Pedro Raccoon">
+                    <div class="game-card-body">
+                        <h3>Pedro Raccoon</h3>
+                        <a href="./pedro-raccoon/" class="btn btn-github" style="font-size: 0.7rem; margin-top:10px;">ACESSAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-4389870681468404"
+                 data-ad-slot="6154472350"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="section-box">
+            <h2><span style="color: var(--accent);">[03]</span> PRIVACIDADE</h2>
+            <p style="font-size: 0.85rem; color: #484f58;">
+                Respeitamos sua privacidade. Utilizamos cookies para melhorar a experiência e exibir anúncios via Google AdSense. Navegando aqui, você aceita nossa política de transparência digital.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="system-log">
+            <span style="color: var(--neon); font-weight: bold;">[SYSTEM_LOG]:</span> 
+            <span id="visit-count">8145 VISITAS_REAIS</span>
+        </div>
+        <p style="color: var(--gray); margin: 10px 0;">&copy; 2026 Guilherme Silva | Visual Studio Games</p>
+        <div style="font-size: 0.7rem; color: #484f58; letter-spacing: 1px;">
+            <span>IP_TRACKER: ACTIVE</span> | <span>FIREWALL: ENABLED</span> | <span>LEVEL: SENIOR</span>
+        </div>
+    </footer>
+
+    <script>
+        // FUNÇÃO PIX (Corrigida)
+        function copyPix() {
+            const pixKey = "1
