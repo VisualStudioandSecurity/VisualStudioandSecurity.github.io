@@ -3,129 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Studio Games | Guilherme Silva</title>
+    <title>Kovaliosky DeV | Senior Developer & Graphic Designer</title>
     
+    <meta name="description" content="Portfólio de Guilherme (Kovaliosky DeV). Especialista em Desenvolvimento Senior, Design Gráfico e Segurança Cibernética.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
     <style>
-        :root { 
-            --bg: #0d1117; --card: #161b22; --accent: #58a6ff; 
-            --green: #238636; --gray: #8b949e; --neon: #00f2ff;
+        :root {
+            --primary: #ffffff;
+            --accent: #00f2ff;
+            --bg-dark: #050505;
+            --card-bg: #0d0d0d;
         }
-
-        body {
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: var(--bg); color: white;
-            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
-            text-align: center; min-height: 100vh;
-            
-            /* CAMADA 1: Bloqueio visual de seleção */
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--primary); 
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
-
-        .container { width: 92%; max-width: 1000px; margin: 30px auto; }
-
-        h1 {
-            font-size: 2.2rem; text-transform: uppercase; letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--neon); color: white;
-            margin-bottom: 5px;
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text {
+            background: linear-gradient(90deg, #fff, #00f2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .section-title { 
-            color: var(--neon); font-size: 1.1rem; margin: 40px 0 20px; 
-            text-transform: uppercase; border-bottom: 1px solid #30363d; 
-            display: inline-block; padding-bottom: 5px; 
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
         }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; width: 100%; margin-top: 20px;
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
         }
-
-        .game-link { text-decoration: none; color: inherit; display: block; }
-        
-        .game-card {
-            background: var(--card); border-radius: 12px; border: 1px solid #30363d;
-            overflow: hidden; transition: 0.3s; text-align: left;
-        }
-
-        .game-link:hover .game-card { transform: translateY(-5px); border-color: var(--neon); }
-        .game-card img { width: 100%; height: 160px; object-fit: cover; background: #000; }
-        .card-content { padding: 15px; }
-        .card-content h3 { margin: 5px 0; color: var(--neon); font-size: 1.1rem; }
-        .card-content p { color: var(--gray); font-size: 0.85rem; }
-
-        .btn-group { margin: 25px 0; display: flex; justify-content: center; gap: 10px; }
-        .btn {
-            padding: 12px 20px; border-radius: 6px; font-weight: bold;
-            text-decoration: none; color: white; border: none; cursor: pointer;
-        }
-        .btn-github { background: var(--green); }
-        .btn-pix { background: #32bcad; color: #0d1117; }
-
-        footer { width: 100%; padding: 20px 0; border-top: 1px solid #30363d; background: #090c10; margin-top: auto; }
-        .apache-footer { margin-top: 20px; font-size: 14px; color: #888; }
-        .apache-footer a { color: var(--neon); text-decoration: none; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Visual Studio Games</h1>
-        <p style="color: var(--gray); font-weight: bold;">Senior Developer & Cyber Security</p>
+<body class="antialiased">
 
-        <div class="btn-group">
-            <a href="https://github.com/VisualStudioAndSecurity" class="btn btn-github" target="_blank">GitHub</a>
-            <button onclick="copyPix()" class="btn btn-pix">Apoiar PIX</button>
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5 px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-bold tracking-tighter mono uppercase">Kovaliosky<span class="text-[#00f2ff]">.DeV</span></div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400 uppercase tracking-widest">
+            <a href="#about" class="hover:text-white transition">Sobre</a>
+            <a href="#services" class="hover:text-white transition">Serviços</a>
+            <a href="#contact" class="hover:text-white transition">Contato</a>
         </div>
+    </nav>
 
-        <div class="section-title">[02] Jogos</div>
-        <div class="gallery">
-            <a href="graffiti-canvas/" class="game-link">
-                <div class="game-card">
-                    <img src="thumb_graffiti.jpg" onerror="this.src='https://via.placeholder.com/300x160/161b22/ef4444?text=Graffiti+Canvas'">
-                    <div class="card-content">
-                        <div style="display: flex; justify-content: space-between;">
-                            <h3>Graffiti Canvas</h3>
-                            <span style="background: #ef4444; padding: 2px 6px; border-radius: 4px; font-size: 10px;">NEW</span>
-                        </div>
-                        <p>Pixe o mural, gerencie sua tinta e salve sua arte.</p>
-                    </div>
-                </div>
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+        <div class="inline-block px-3 py-1 border border-[#00f2ff]/30 rounded-full text-[#00f2ff] text-[10px] font-bold uppercase tracking-[0.3em] mb-6 animate-pulse">
+            Disponível para Projetos High-End
+        </div>
+        <h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 text-center">
+            VANGUARDS <br> <span class="gradient-text tracking-normal italic">VISUAL STUDIO</span>
+        </h1>
+        <p class="max-w-2xl text-center text-gray-400 text-lg md:text-xl leading-relaxed mb-10">
+            Arquitetura de software de alta performance e design gráfico estratégico. Transformando linhas de código em experiências visuais de elite.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-4">
+            <button onclick="copyPix()" class="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-[#00f2ff] transition-all transform hover:scale-105">
+                CONTRATAR AGORA (PIX)
+            </button>
+            <a href="https://github.com/VisualStudioAndSecurity" target="_blank" class="px-8 py-4 border border-white/10 rounded-full font-bold hover:bg-white/5 transition-all text-center">
+                VER REPOSITÓRIO
             </a>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <div style="color: var(--neon); font-family: monospace; margin-bottom: 10px;">[SYSTEM_LOG]: ONLINE</div>
-        
-        <div class="apache-footer">
-            <p>&copy; 2026 <strong>Visual Studio Games</strong>. Todos os direitos reservados.</p>
-            <p>Distribuído sob a <a href="LICENSE">Apache License 2.0</a>.</p>
-            <p style="font-size: 10px; opacity: 0.5;">Desenvolvido por Kovaliosky DeV</p>
+    <section id="services" class="py-24 px-6 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-10 rounded-3xl">
+                <div class="text-[#00f2ff] mb-6 mono text-lg font-bold">01/</div>
+                <h3 class="text-2xl font-bold mb-4">Software Dev</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Desenvolvimento Full-Stack focado em automação, escalabilidade e segurança de dados.</p>
+            </div>
+            <div class="glass-card p-10 rounded-3xl">
+                <div class="text-[#00f2ff] mb-6 mono text-lg font-bold">02/</div>
+                <h3 class="text-2xl font-bold mb-4">Graphic Design</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Identidade visual profissional, logotipos e branding de alta conversão para marcas digitais.</p>
+            </div>
+            <div class="glass-card p-10 rounded-3xl">
+                <div class="text-[#00f2ff] mb-6 mono text-lg font-bold">03/</div>
+                <h3 class="text-2xl font-bold mb-4">Cyber Security</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Consultoria em proteção de dados, blindagem de código e protocolos de segurança ativa.</p>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        // --- CAMADA 2: Bloqueio de Context Menu (Botão Direito) ---
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // --- CAMADA 3: Bloqueio de Teclas de Inspeção (F12, Ctrl+Shift+I, Ctrl+U) ---
-        document.onkeydown = function(e) {
-            // F12
-            if(e.keyCode == 123) return false;
-            // Ctrl+Shift+I (Inspecionar)
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            // Ctrl+Shift+J (Console)
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-            // Ctrl+U (Ver Código Fonte)
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-        }
-
-        function copyPix() {
-            navigator.clipboard.writeText("10267545266").then(() => alert("PIX Copiado!"));
-        }
-    </script>
-</body>
-</html>
+    <footer id="contact" class="py-20 border-t border-white/5 px-6 text-center">
+        <div class="mono text-[10px] text-gray-600 tracking-[0.5em] uppercase mb-8">System Status: Operational</div>
+        <div class="flex justify-center gap-6 mb-10">
+            <a href="#" class="text-gray-400 hover:text-[#00f2ff] transition text-sm underline underline-offset-8">LinkedIn</a>
+            <a href="#" class="text-gray-400 hover:text-[#00f2ff] transition text
