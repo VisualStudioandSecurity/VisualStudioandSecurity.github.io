@@ -26,13 +26,14 @@
         
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
         
-        .featured-article { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
-        .article-header-img { width: 100%; height: 350px; background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; }
+        .featured-article { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 50px; }
+        .article-header-img { width: 100%; height: 300px; background-size: cover; background-position: center; }
         
         .article-body { padding: 40px; }
         .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; background: var(--accent-green); color: white; }
-        
-        h1.post-title { font-size: 2.2rem; color: var(--header); margin-top: 0; line-height: 1.2; }
+        .badge-apple { background: #555; }
+
+        h1.post-title { font-size: 2rem; color: var(--header); margin-top: 0; line-height: 1.2; }
         .meta { font-size: 0.85rem; color: #8b949e; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
         
         .post-content h3 { color: var(--accent-blue); margin-top: 30px; border-left: 4px solid var(--accent-blue); padding-left: 15px; }
@@ -55,44 +56,54 @@
 </header>
 
 <div class="container">
+    
     <article class="featured-article">
-        <div class="article-header-img"></div>
+        <div class="article-header-img" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200');"></div>
         <div class="article-body">
-            <span class="badge">Relatório Técnico Profissional</span>
-            <h1 class="post-title">Análise Forense: Campanha FAUX#ELEVATE e o Sequestro de Recursos Corporativos</h1>
+            <span class="badge">Relatório Técnico</span>
+            <h1 class="post-title">Campanha FAUX#ELEVATE: O Ataque de 25 Segundos</h1>
             <div class="meta">Publicado por Equipe Técnica Visual Studio & Security | 24 de Março, 2026</div>
             
             <div class="post-content">
-                <p>Hackers estão utilizando uma nova abordagem altamente sofisticada para comprometer redes empresariais, focando no roubo massivo de credenciais e na implementação de mineradores de criptoativos ocultos[cite: 1]. Esta operação, identificada por especialistas como <strong>FAUX#ELEVATE</strong>, utiliza engenharia social refinada e abusos de infraestruturas legítimas para contornar defesas tradicionais[cite: 2].</p>
+                <p>A campanha <strong>FAUX#ELEVATE</strong> utiliza currículos falsos como "bait" para iniciar uma cadeia de infecção extremamente rápida em ambientes corporativos. O malware utiliza scripts VBScript de 224 mil linhas para ocultar sua carga útil real e evitar detecção por sandboxes.</p>
 
-                <h3>A Anatomia do Ataque: O VBScript de 224 Mil Linhas</h3>
-                <p>O ataque inicia-se com e-mails de phishing direcionados que entregam currículos (CVs) falsos[cite: 1, 3]. Quando o arquivo é aberto, o sistema exibe uma mensagem de erro simulando um arquivo corrompido — um "bait" clássico[cite: 3]. Por trás dessa tela, o Windows executa um script <strong>Visual Basic Script (VBS)</strong> massivo com aproximadamente 224 mil linhas de código ofuscado, das quais apenas 226 contêm a carga útil real[cite: 3].</p>
-
-                <h3>Exfiltração via SMTP e Roubo de Credenciais</h3>
-                <p>O malware utiliza o projeto <em>ChromElevator</em> para contornar as proteções de criptografia vinculada a aplicativos (ABE) e extrair senhas de navegadores baseados em Chromium[cite: 5]. Além disso, ferramentas específicas como o <strong>mozilla.vbs</strong> e o <strong>walls.vbs</strong> são implantadas para roubar perfis do Firefox e arquivos sensíveis diretamente do desktop[cite: 6].</p>
-                <p>Os dados roubados são exfiltrados através de duas contas russas independentes (<em>olga.aitsaid@mail.ru</em> e <em>3pw5nd9neeyn@mail.ru</em>) que compartilham a mesma senha via protocolo SMTP, enviando o conteúdo para o endereço final do atacante[cite: 6, 7].</p>
-
-                <h3>Criptomineração e Persistência no Kernel</h3>
-                <p>Após o roubo de dados, a campanha implementa o <strong>mservice.exe</strong> (XMRig) para minerar Monero[cite: 1, 6]. Para garantir o desempenho máximo, é utilizado o driver de kernel <strong>WinRing0x64.sys</strong>, permitindo o sequestro total do potencial da CPU[cite: 6]. O Trojan <strong>RuntimeHost.exe</strong> mantém a persistência, modificando regras de firewall e comunicando-se periodicamente com servidores de comando e controle (C2) hospedados em sites WordPress comprometidos[cite: 2, 6].</p>
-
-                <div class="warning-box">
-                    <strong>Alerta de Velocidade:</strong> A cadeia de infecção completa — da execução do VBS até a exfiltração final — ocorre em aproximadamente <strong>25 segundos</strong>, tornando a resposta manual humana praticamente impossível[cite: 10].
-                </div>
-
-                <h3>Mecanismo de Defesa Recomendado</h3>
-                <p>Para mitigar esta ameaça em sua rede, nossa equipe recomenda a aplicação imediata do seguinte script de endurecimento via PowerShell, focado em desativar o Windows Script Host e bloquear as portas de exfiltração SMTP:</p>
+                <h3>Exfiltração e Mineração</h3>
+                <ul>
+                    <li><strong>Roubo de Dados:</strong> Utiliza o projeto <em>ChromElevator</em> para extrair credenciais de navegadores baseados em Chromium.</li>
+                    <li><strong>Criptomineração:</strong> Instala o minerador <em>mservice.exe</em> (XMRig) utilizando o driver de kernel <em>WinRing0x64.sys</em> para sequestrar o poder da CPU.</li>
+                    <li><strong>Destino:</strong> Os dados são enviados para contas russas como <em>olga.aitsaid@mail.ru</em> via SMTP.</li>
+                </ul>
 
                 <div class="code-block">
-                    # Desativa o motor de execução VBScript malicioso<br>
-                    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Value 0<br><br>
-                    # Bloqueia exfiltração via SMTP para e-mails desconhecidos<br>
-                    New-NetFirewallRule -DisplayName "Block_Malware_SMTP" -Direction Outbound -LocalPort 587 -Protocol TCP -Action Block
+                    # Script de Proteção Sugerido<br>
+                    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Value 0<br>
+                    Stop-Process -Name "mservice" -Force -ErrorAction SilentlyContinue
                 </div>
-
-                <p><em>Referência: Dados baseados no relatório técnico da Securonix sobre operações de ameaças em múltiplas etapas[cite: 9, 10].</em></p>
             </div>
         </div>
     </article>
+
+    <article class="featured-article">
+        <div class="article-header-img" style="background-image: url('https://images.unsplash.com/photo-1611186871348-b1ec696e5237?q=80&w=1200');"></div>
+        <div class="article-body">
+            <span class="badge badge-apple">Atualização de Sistema</span>
+            <h1 class="post-title">Apple Lança Melhorias de Segurança em Segundo Plano para Corrigir Falha no WebKit</h1>
+            <div class="meta">Publicado por Equipe Técnica Visual Studio & Security | 24 de Março, 2026</div>
+            
+            <div class="post-content">
+                <p>A Apple iniciou a distribuição de uma nova categoria de atualizações chamada <strong>Melhorias de Segurança em Segundo Plano</strong>. Esta iniciativa visa reforçar a proteção dos sistemas iOS, iPadOS e macOS sem a necessidade de instalar versões completas de software.</p>
+
+                <h3>Correção do CVE-2026-20643</h3>
+                <p>A primeira leva dessas atualizações corrige uma vulnerabilidade crítica no <strong>WebKit</strong> (mecanismo do Safari). O problema envolvia uma brecha de origem cruzada na API de Navegação, que poderia permitir que sites maliciosos acessassem dados de outros domínios, violando o isolamento de segurança.</p>
+                
+                <p>A falha afetava as versões 26.3.1 do iOS e iPadOS, além do macOS 26.3.1 e 26.3.2. A correção foi implementada através de uma melhoria na validação de entrada, graças ao relato do pesquisador Thomas Espach.</p>
+
+                <h3>Gestão e Recomendações</h3>
+                <p>As Melhorias de Segurança em Segundo Plano podem ser gerenciadas no menu <strong>Privacidade e Segurança</strong> das configurações do dispositivo. A Apple recomenda manter a "Instalação Automática" ativada para garantir proteção imediata contra ameaças emergentes, como a recente falha zero-day (CVE-2026-20700) corrigida anteriormente.</p>
+            </div>
+        </div>
+    </article>
+
 </div>
 
 <footer>
@@ -101,8 +112,4 @@
         <a href="privacidade.html">Política de Privacidade</a>
         <a href="sitemap.xml">Sitemap</a>
     </nav>
-    <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2026 Visual Studio & Security. Todos os direitos reservados.</p>
-</footer>
-
-</body>
-</html>
+    <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2026 Visual Studio & Security. Todos os direitos reservados.</
