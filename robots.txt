@@ -1,5 +1,16 @@
+# Robots.txt para Visual Studio & Security | Intelligence Hub
+# Criado por Kovaliosky DeV
+
 User-agent: *
 Allow: /
 
-# Link para o seu Sitemap (https://github.com/VisualStudioandSecurity)
-Sitemap: https://visualstudioandsecurity.github.io/VisualStudioGame/sitemap.xml
+# Bloquear pastas de sistema ou assets que não precisam de indexação
+Disallow: /assets/private/
+Disallow: /admin/
+
+# Link para o seu Sitemap (ajuda o Google a encontrar suas páginas mais rápido)
+Sitemap: https://visualstudio.github.io/sitemap.xml
+
+# Instrução específica para o robô do AdSense
+User-agent: Mediapartners-Google
+Allow: /
