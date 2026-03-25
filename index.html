@@ -31,30 +31,20 @@
             color: var(--text); 
             line-height: 1.6;
         }
-        
-        /* Layout de Grade para Anúncios Laterais */
+
         .main-layout {
             display: flex;
             justify-content: center;
             gap: 20px;
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .side-ad {
-            flex: 0 0 160px;
-            display: none; /* Esconde em telas menores que 1200px */
-        }
+        .side-ad { flex: 0 0 160px; display: none; }
+        @media (min-width: 1240px) { .side-ad { display: block; } }
 
-        @media (min-width: 1200px) {
-            .side-ad { display: block; }
-        }
-
-        .content-area {
-            flex: 1;
-            max-width: 900px;
-        }
+        .content-area { flex: 1; max-width: 900px; }
 
         .intel-report {
             background: var(--card);
@@ -64,16 +54,22 @@
             margin-bottom: 30px;
         }
 
+        .badge { background: var(--critical); color: #fff; padding: 4px 8px; font-family: 'JetBrains Mono'; font-size: 0.7rem; border-radius: 4px; }
+        h1.report-title { font-family: 'JetBrains Mono'; font-size: 1.8rem; margin: 20px 0; color: #fff; }
+        .report-content p { margin-bottom: 20px; color: #8b949e; text-align: justify; }
+        .tool-list { margin: 25px 0; padding-left: 20px; border-left: 2px solid var(--accent); }
+        .tool-item { margin-bottom: 15px; font-size: 0.9rem; }
+        .tool-name { color: var(--accent); font-family: 'JetBrains Mono'; font-weight: bold; }
+
         .multiplex-container {
-            margin: 40px 0;
+            margin-top: 40px;
             padding: 20px;
             background: rgba(22, 27, 34, 0.5);
             border: 1px dashed var(--border);
             border-radius: 8px;
         }
 
-        .badge { background: var(--critical); color: #fff; padding: 4px 8px; font-family: 'JetBrains Mono'; font-size: 0.7rem; }
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); opacity: 0.6; }
+        footer { text-align: center; padding: 60px; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -92,8 +88,29 @@
     <main class="content-area">
         <article class="intel-report">
             <span class="badge">Ameaça Crítica: FAUX#ELEVATE</span>
-            <h1 style="color: #fff; font-family: 'JetBrains Mono'; margin: 20px 0;">Relatório: Exfiltração de Dados</h1>
-            <p style="color: #8b949e;">[Conteúdo do seu relatório de Cybersecurity...]</p>
+            <h1 class="report-title">Relatório de Inteligência: Mineração e Exfiltração de Dados</h1>
+            
+            <div class="report-content">
+                <p><strong>Hackers estão utilizando uma nova abordagem para roubar credenciais empresariais e implementando o Crypto miner (Mecanismo de Mineração de Crypto ativos).</strong></p>
+                
+                <p>Há uma campanha rodando com o foco em ambientes corporativos na qual currículos falsos implantados com um mecanismo de mineradores e roubo de informações utilizando VBScript com ofuscação disfarçados de Doc de currículos/Cv. Os cibercriminosos utilizam E-mails de Phishing; quando ativo, o malware aplica uma execução de ferramentas multiuso configurada para extrair dados e minerar crypto ativos da rede Monero.</p>
+
+                <p>O mecanismo se tornou popularmente chamado de <strong>Faux#Elevate</strong>. A campanha se destaca por seus abusos de infraestruturas legítimas, utilizando DropBox para payloads e sites WordPress comprometidos para controle (C2). Também utilizam SMTP .ru para exfiltração de credenciais de navegadores e arquivos de Desktop.</p>
+
+                <p>Os invasores utilizam um sistema de Visual Basic Script que exibe uma mensagem de erro falsa (isca), enquanto um script de 224 mil linhas executa verificações para evitar sandboxes. O malware utiliza <em>Windows Management Instrumentation (WMI)</em> para persistência em sistemas empresariais, desativando o Microsoft Defender e o UAC via registro do Windows.</p>
+
+                <div class="tool-list">
+                    <div class="tool-item"><span class="tool-name">mozilla.vbs:</span> Roubo de perfil e credenciais do Firefox.</div>
+                    <div class="tool-item"><span class="tool-name">walls.vbs:</span> Exfiltração de arquivos do desktop.</div>
+                    <div class="tool-item"><span class="tool-name">mservice.exe:</span> Minerador XMRig via site WordPress comprometido.</div>
+                    <div class="tool-item"><span class="tool-name">WinRing0x64.sys:</span> Driver de kernel para desbloquear potencial da CPU.</div>
+                    <div class="tool-item"><span class="tool-name">RuntimeHost.exe:</span> Trojan persistente que modifica o Firewall.</div>
+                </div>
+
+                <p style="border-top: 1px solid var(--border); padding-top: 20px; font-style: italic; color: #8b949e;">
+                    "O que torna esta campanha particularmente perigosa é a velocidade de execução: a cadeia completa ocorre em aproximadamente 25 segundos." - Securonix.
+                </p>
+            </div>
         </article>
 
         <div class="multiplex-container">
@@ -103,9 +120,7 @@
                  data-ad-format="autorelaxed"
                  data-ad-client="ca-pub-4389870681468404"
                  data-ad-slot="9348417801"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     </main>
 
@@ -121,7 +136,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Kovaliosky DeV | Security Audit Specialist</p>
+    <p>&copy; 2026 Kovaliosky DeV | Visual Studio & Security. Built for Performance.</p>
 </footer>
 
 </body>
