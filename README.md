@@ -39,6 +39,24 @@ Este projeto utiliza camadas de proteção para garantir a integridade da propri
 --->  file:///C:/Users/Pichau/visual-studio-security/siteestilomercadolivre.html  <--------------------------------------------------------------------------------
 ---> file:///C:/Users/Pichau/visual-studio-security/Portf%C3%B3liodeamostra/index.html<------------------------------------------------------------------------
 
+"Como Instalar" - "Para replicar este ambiente de laboratório, execute:                               
+->  pip install -r requirements.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 📧 Contato Comercial
 Interessado em blindar sua aplicação ou desenvolver uma interface de alto nível?
 
